@@ -1,0 +1,197 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Primary Meta Tags -->
+        <title>APA Transformer</title>
+        <meta name="title" content="APA Easy Converter">
+        <meta name="description" content="Remove all brackets citation in the sentences.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://fbps.tsraise.com/index.html">
+        <meta property="og:title" content="APA Easy Converter">
+        <meta property="og:description" content="Remove all brackets citation in the sentences.">
+        <meta property="og:image" content="https://fbps.tsraise.com/fbPostSpliter.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <!--meta property="twitter:url" content="https://tsraise.com"-->
+        <meta property="twitter:title" content="APA Easy Converter">
+        <meta property="twitter:description" content="Remove all brackets citation in the sentences.">
+        <meta property="twitter:image" content="https://fbps.tsraise.com/fbPostSpliter.png">
+        <link rel=stylesheet type="text/css" href="main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    </head>
+
+    <body class="body" style="background-color:black; margin:0; padding:0;">
+        <!-- <h1 id="title" style="text-align: left; color:white; margin-left:5%;margin-top:1%;">APA Easy Converter</h1> -->
+        <div style="margin-bottom: 0;">
+        <!-- <div id="content" style="text-align:center;margin-left: 2%;margin-right:2%;padding-top:2px;background-color:white;"> -->
+        <div id="content" style="text-align:center;padding-top:2px;">
+        <script language="javascript">
+            TITLE = document.getElementById("title").innerHTML;
+
+            function replaceAll(string, search, replace) {
+                return string.split(search).join(replace);
+            }
+
+            function Start(){
+                // document.getElementById("title").innerHTML = TITLE + "  (Pending)"
+                var text = document.getElementById("target").value;
+                let all_citations = [...text.matchAll(/\(([^)]+)\)/g)]
+                all_citations = all_citations.map(e => e[1])
+                console.log(all_citations)
+                for(let i in all_citations){
+                    text = text.replace(all_citations[i], '')
+                    console.log(text, all_citations[i])
+                }
+                document.getElementById("target").value = text;
+
+
+
+
+                // document.getElementById("title").innerHTML = TITLE + ""
+                setTimeout(() => { document.getElementById("title").innerHTML = TITLE; }, 10000);
+
+                $("#start").css('background-color', '')
+                $("#doCopy").css('background-color', 'orange')
+                setTimeout(() => { $("#doCopy").css('background-color', '')}, 10000);
+            }
+
+            function retreat() {
+                var 超級特殊空白 = String.fromCharCode(8203);
+                var text = document.getElementById("target").value;
+                text = replaceAll(text, 超級特殊空白, "")
+                document.getElementById("target").value = text;
+            }
+            
+            function copy() {
+                $("#doCopy").css('background-color', '')
+                /* Get the text field */
+                var copyText = document.getElementById("target");
+
+                /* Select the text field */
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+
+                /* Alert the copied text */
+                originText = document.getElementById("myTooltipCopy").innerHTML
+                document.getElementById("myTooltipCopy").innerHTML = "Copied!"
+                setTimeout(() => { document.getElementById("myTooltipCopy").innerHTML = originText; }, 2000);
+                }
+
+            window.onload = function(){
+                target = $('#target');
+                
+                // if(target.val()==""){
+                //     target.css('color','gray');
+                //     target.val('Please paste the paper (APA format)')
+                // }
+
+                focus(target)
+
+                var target = document.getElementById("target");
+    
+                target.addEventListener("keydown", function (event) {
+                    if(target.value != "Please Paste Your Paper Content"){
+                        $("#start").css('background-color', 'orange');
+                        setTimeout(() => { $("#start").css('background-color', '')}, 10000);
+                    }
+                });
+            }
+
+            
+            
+            </script>
+    <div class="info" style="text-align: left; margin-left: 2%;margin-right: 2%;margin-top:2%;">
+        
+    <textarea id="target" style='background-color:black;height:90%;width:100%;margin:auto;font-size:150%;text-align: cetner;display:block;' onfocus="if(this.value == 'Please paste the paper (APA format)'){this.value = '';};$('#'+this.id).css('color','white');" type="text" onblur="if(this.value == ''){this.value='Please paste the paper (APA format)';$('#'+this.id).css('color','gray');}" autofocus></textarea>
+    <div style="text-align: center;">
+    <div class="tooltip copy">
+        <span class="tooltiptext" id="myTooltip">Click to Start</span>
+        <button type="button" id='start' style='margin:auto;' onclick="Start()" class="w3-button">Convert</button>
+    </div>
+    <!-- <div class="tooltip" id="copy">
+        <span class="tooltiptext" id="myTooltipCopy">Copy</span>
+        <button id='doCopy' style='margin:auto;' onclick="copy()" class="w3-button w3-border w3-light-grey w3-left w3-mobile">
+            Copy
+            </button>
+    </div> -->
+    <!-- <div class="tooltip" id="copy">
+        <span class="tooltiptext" id="myTooltipCopy">移除分段</span>
+        <button id='doCopy' style='margin:auto;' onclick="retreat()" class="w3-button w3-border w3-light-grey w3-left w3-mobile">
+            還原
+            </button>
+    </div> -->
+
+
+    <div class="tooltip" style="right:0%;position:relative;">
+        <span class="tooltiptext" id="myTooltip">To Tutorial</span>
+        <button onClick="document.getElementById('tutorial').scrollIntoView({behavior:'smooth'});" class="w3-button w3-border w3-light-grey w3-left w3-mobile">
+            How to use?
+            </button>
+    </div>
+    <div class="tooltip" style="right:0%;position:relative;">
+        <span class="tooltiptext" id="myTooltip">To About</span>
+        <button onClick="document.getElementById('AboutAuthor').scrollIntoView({behavior:'smooth'});" class="w3-button w3-border w3-light-grey w3-left w3-mobile">
+            About Author
+            </button>
+    </div>
+</div>
+    <br>
+    <div style="margin-left:2%;margin-right:2%;">
+        <!-- <h2 id="-">創作源起</h2>
+        <p>因為我注意到很多人的中文臉書貼文<br>
+        在區分段落時，都是用換兩行表示</p>
+        <p>然而，當你這樣做時，<br>
+        臉書不會幫你的中文換下完整的一行</p>
+        <p>臉書只會換半行，<br>
+        可能因為這樣對於英文的閱讀是比較方便的。<br>
+        但這樣的行距，並不適合中文讀者</p>
+        <p>結果就是文章的段落擠在一起，較不容易閱讀<br>這件事，對好文章來說，是非常可惜的事情</p>
+        <p>因此，我稍微改了一下之前做的 <a href="https://easonc13.github.io/WordCommenter/" target="_blank">Ｗord-Commenter</a> 原始碼，<br>
+        然後，「臉書貼文分段者」就誕生了！</p>
+        <p>透過在換行處加上特殊空白<br>讓你的段落間距放大，達到真正的換行</p>
+        <p>本服務完全使用前端 JavaScript 運行，可在無網路環境使用。</p>
+        <br>
+        <h2 id="tutorial">如何使用？</h2>
+        <img src="./introImg.png" class='picture' alt="" style="max-width: 50%;">
+        <ol>
+        <li>貼上你準備發布的文章</li>
+        <li>按下「一鍵分段」</li>
+        <li>複製起來，貼到臉書去發布</li>
+        <li>享受漂亮的段落間隔排版</li>
+        <li>將這個好工具分享給朋友</li>
+        </ol> -->
+    </div>
+    <br>
+    <div>
+        <h2 id="AboutAuthor">關於作者</h2>
+        <p>作者：陳怡升 EasonC13</p>
+        <p>現在就讀臺師大，學習科學學士班三年級。<br>喜歡用程式解決生活中的問題。</p>  
+        <p>原始碼請見 <a href="https://github.com/EasonC13/FB_PostSegmenter" target="_blank">EasonC13 的 GitHub</a></p>          
+        <p>怡升的<a href="https://www.facebook.com/EasonC13">臉書連結</a>，歡迎你來追蹤，藉此更了解怡升！</p>
+        <p>怡升的<a href="https://tsraise.com">部落格：抬升 Raise</a>，歡迎你來逛逛，很多優質的文章！</p>
+        <p>怡升的 <a href="https://github.com/EasonC13">GitHub</a>，歡迎你來晃晃，很多有趣的程式專案！</p>
+        <p>怡升<a href="https://tsraise.com/?cat=49">做過的其他工具</a>，歡迎你來看看有沒有能幫上你的！</p>
+    </div>
+</div>
+<br>
+</div>
+    <script>
+        //React
+        width = window.innerWidth;
+        height = window.innerHeight;
+        console.log(width, height);
+        if(width/height  <= 0.7 ){
+            $("button").css("font-size", "300%")
+            $("p").css("margin-top", "40px")
+        }else{
+        }
+    </script>
+</div>
+ </body>
+ </html>
